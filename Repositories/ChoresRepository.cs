@@ -44,4 +44,16 @@ public class ChoresRepository
       throw new Exception($"{rowsAffected} chores deleted -- what have you done...");
     }
   }
+
+  internal Chore CreateChore(Chore choreData)
+  {
+    string sql = @"
+    INSERT INTO chores(name, description, num_workers)
+    VALUES (@Name, @Description, @NumWorkers);
+    
+    SELECT * FROM chores WHERE id = LAST_INSERT_ID();";
+
+    Chore chore = _db.Query<Chore>(sql, choreData).SingleOrDefault();
+    return chore;
+  }
 }
