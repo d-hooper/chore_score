@@ -16,4 +16,11 @@ public class ChoresRepository
     List<Chore> chores = _db.Query<Chore>(sql).ToList();
     return chores;
   }
+
+  internal Chore GetChoreById(int choreId)
+  {
+    string sql = "SELECT * FROM chores WHERE id = @choreId";
+    Chore chore = _db.Query<Chore>(sql, new { choreId }).SingleOrDefault();
+    return chore;
+  }
 }
