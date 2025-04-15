@@ -3,22 +3,23 @@ using chore_score.Services;
 public class ChoresService
 {
 
-  public readonly ChoresRepository _choresRepository;
+  public readonly ChoresRepository _repository;
 
   public ChoresService(ChoresRepository choresRepository)
   {
-    _choresRepository = choresRepository;
+    _repository = choresRepository;
   }
+
 
   internal List<Chore> GetAllChores()
   {
-    List<Chore> chores = _choresRepository.GetAllChores();
+    List<Chore> chores = _repository.GetAllChores();
     return chores;
   }
 
   internal Chore GetChoreById(int choreId)
   {
-    Chore chore = _choresRepository.GetChoreById(choreId);
+    Chore chore = _repository.GetChoreById(choreId);
 
     if (chore == null)
     {
@@ -26,5 +27,10 @@ public class ChoresService
     }
 
     return chore;
+  }
+
+  internal void DeleteChore(int choreId)
+  {
+    _repository.DeleteChore(choreId);
   }
 }

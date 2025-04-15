@@ -24,6 +24,7 @@ public class ChoresController : ControllerBase
       return BadRequest(error.Message);
     }
   }
+
   [HttpGet("{choreId}")]
   public ActionResult<Chore> GetChoreById(int choreId)
   {
@@ -31,6 +32,20 @@ public class ChoresController : ControllerBase
     {
       Chore chore = _choresService.GetChoreById(choreId);
       return Ok(chore);
+    }
+    catch (Exception error)
+    {
+      return BadRequest(error.Message);
+    }
+  }
+
+  [HttpDelete("{choreId}")]
+  public ActionResult<Chore> DeleteChore(int choreId)
+  {
+    try
+    {
+      _choresService.DeleteChore(choreId);
+      return Ok($"Chore (Id: {choreId}) was deleted");
     }
     catch (Exception error)
     {
